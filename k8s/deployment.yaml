@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superk8s
+  namespace: gabriel
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: superk8s
+  template:
+    metadata:
+      labels:
+        app: superk8s
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: superk8s
+          image: gabrieltherock/superk8s:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: 900Mi
+              cpu: 0.8
